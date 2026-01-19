@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Model Performance Analysis</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.2/lux/bootstrap.min.css">
+
+    <style>
+        .perf-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+        }
+        .cm-table td {
+            font-weight: bold;
+        }
+	 nav {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+        }
+
+    </style>
+</head>
+
+<body>
+<nav>
+    <a href="/performance/charts">charts</a>
+</nav>
+
+
+<div class="container mt-4">
+
+    <h2 class="text-center mb-4">📊 Model Performance Analysis</h2>
+
+    <!-- XGBOOST SECTION -->
+    <div class="perf-box">
+        <h3 class="text-primary">1️⃣ XGBoost Classifier</h3>
+        <hr>
+
+        <p><b>Accuracy:</b> {{ xgb.accuracy }}%</p>
+        <p><b>Precision:</b> {{ xgb.precision }}</p>
+        <p><b>Recall:</b> {{ xgb.recall }}</p>
+        <p><b>F1 Score:</b> {{ xgb.f1 }}</p>
+	<h5 class="mt-3">Confusion Matrix:</h5>
+<table class="table table-bordered cm-table">
+    <tr>
+        <!-- True Negative (0,0) -->
+        <td style="background-color: #4caf50; color: white;">{{ xgb.cm[0][0] }}</td>
+        <!-- False Positive (0,1) -->
+        <td style="background-color: #f44336; color: white;">{{ xgb.cm[0][1] }}</td>
+    </tr>
+    <tr>
+        <!-- False Negative (1,0) -->
+        <td style="background-color: #ff9800; color: white;">{{ xgb.cm[1][0] }}</td>
+        <!-- True Positive (1,1) -->
+        <td style="background-color: #2196f3; color: white;">{{ xgb.cm[1][1] }}</td>
+    </tr>
+</table>
+
+        
+    </div>
+
+    <!-- STACKING MODEL SECTION -->
+    <div class="perf-box">
+        <h3 class="text-success">2️⃣ Stacking Classifier</h3>
+        <hr>
+
+        <p><b>Accuracy:</b> {{ stack.accuracy }}%</p>
+        <p><b>Precision:</b> {{ stack.precision }}</p>
+        <p><b>Recall:</b> {{ stack.recall }}</p>
+        <p><b>F1 Score:</b> {{ stack.f1 }}</p>
+	<h5 class="mt-3">Confusion Matrix:</h5>
+<table class="table table-bordered cm-table">
+    <tr>
+        <!-- True Negative (0,0) -->
+        <td style="background-color: #4caf50; color: white;">{{ stack.cm[0][0] }}</td>
+        <!-- False Positive (0,1) -->
+        <td style="background-color: #f44336; color: white;">{{ stack.cm[0][1] }}</td>
+    </tr>
+    <tr>
+        <!-- False Negative (1,0) -->
+        <td style="background-color: #ff9800; color: white;">{{ stack.cm[1][0] }}</td>
+        <!-- True Positive (1,1) -->
+        <td style="background-color: #2196f3; color: white;">{{ stack.cm[1][1] }}</td>
+    </tr>
+</table>
+
+            </div>
+
+</div>
+
+</body>
+</html>

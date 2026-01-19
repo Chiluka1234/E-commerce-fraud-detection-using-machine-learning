@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>E-Commerce Fraud Detection</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f8f9fa; }
+        h2 { color: #17a2b8; margin-top: 20px; }
+        .table-container {
+            max-height: 500px;
+            overflow-y: scroll;
+            overflow-x: scroll;
+            margin-top: 20px;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 10px;
+        }
+        .btn-train {
+            margin-top: 20px;
+            font-size: 18px;
+            padding: 10px 25px;
+            border-radius: 30px;
+        }
+    </style>
+</head>
+<body class="text-center">
+    <div class="container">
+        <h2>E-Commerce Fraud Detection</h2>
+        <p class="text-secondary">File: {{ filename }}</p>
+
+        <div class="table-container">
+            {{ table | safe }}
+        </div>
+
+        <!-- ✅ Fixed link to fraudform route -->
+        <a href="{{ url_for('fraudform') }}" class="btn btn-info btn-train">
+            Click to Train | Test

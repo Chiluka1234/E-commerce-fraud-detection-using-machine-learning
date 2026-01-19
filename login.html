@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Fraud Detection - Login</title>
+
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        #app-container {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #e2e8f0;
+            position: relative;
+            overflow: hidden;
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                url('Gemini_Generated_Image_jezin9jezin9jezi.jpg');
+            background-size: cover;
+            background-position: center;
+            background-color: #0d1a26;
+            z-index: 10;
+        }
+
+        .brand-text {
+            color: #00bcd4;
+            text-shadow: 0 0 8px rgba(0, 188, 212, 0.5);
+            font-weight: 600;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#00bcd4',
+                        'accent-orange': '#ff9800',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="app-container">
+        <!-- Navigation Header -->
+        <header class="p-6 flex justify-between items-center relative z-30">
+            <h1 class="text-2xl font-bold brand-text tracking-wider">E-Commerce Fraud Detection</h1>
+            <nav class="space-x-4 text-sm font-medium">
+                <a href="{{ url_for('home') }}" class="py-1 px-3 rounded transition hover:bg-white/10">
+                    Home
+                </a>
+                <a href="{{ url_for('login') }}" class="py-1 px-3 rounded brand-text bg-white/10 transition">
+                    Login
+                </a>
+            </nav>
+        </header>
+
+        <!-- Main Content Area (Login View) -->
+        <main class="flex items-center justify-center p-4 sm:p-8 flex-grow">
+            <div id="login-form-container" class="w-full max-w-md relative z-20">
+                <div class="mx-auto bg-gray-800/95 backdrop-blur-sm p-8 sm:p-10 rounded-xl shadow-2xl space-y-6 text-left border border-primary-blue/30">
+                    
+                    <h2 class="text-3xl font-extrabold text-white text-center brand-text">
+                        Sign In
+                    </h2>
+                    <p class="text-center text-gray-400 text-sm">Access your fraud analysis dashboard.</p>
+
+                    <!-- Flash messages (success/error) -->
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            {% for category, message in messages %}
+                                <div class="text-center text-sm p-2 rounded 
+                                    {% if category == 'success' %}bg-green-700/60{% elif category == 'error' %}bg-red-700/60{% else %}bg-gray-700/60{% endif %}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+
+                    <!-- FORM SUBMISSION IS HANDLED BY PYTHON -->
+                    <form method="POST" action="{{ url_for('login_submit') }}" class="space-y-5">
+                        <!-- Email Input -->
+                        <div>
+                            <label for="username" class="block text-sm font-medium text-gray-300 mb-1">Email Address</label>
+                            <input type="email" id="username" name="username" required 
+                                class="w-full px-4 py-2 bg-gray-700/80 border border-primary-blue/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-blue transition duration-200" 
+                                placeholder="name@example.com">
+                        </div>
+
+                        <!-- Password Input -->
+                        <div>
+                            <label for="password" class="block text-sm font-medium text-gray-300 mb-1">Password</label>
+                            <input type="password" id="password" name="password" required 
+                                class="w-full px-4 py-2 bg-gray-700/80 border border-primary-blue/20 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-blue transition duration-200" 
+                                placeholder="••••••••">
+                        </div>
+
+                        <!-- Login Button -->
+                        <button type="submit" 
+                            class="w-full bg-primary-blue hover:bg-cyan-700 text-white font-bold py-3 rounded-lg shadow-lg transform transition duration-300 hover:scale-[1.01]">
+                            LOGIN TO DASHBOARD
+                        </button>
+
+                        <!-- Footer Links -->
+                        <div class="flex justify-between text-sm pt-2">
+                            <a href="#" class="text-gray-400 hover:text-primary-blue transition">Forgot Password?</a>
+                            <a href="#" class="text-gray-400 hover:text-primary-blue transition">Register for an Account</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="text-xs text-gray-500 text-center py-4 relative z-30">
+            &copy; 2025 JP Infotech. All Rights Reserved.
+        </footer>
+    </div>
+</body>
+</html>
